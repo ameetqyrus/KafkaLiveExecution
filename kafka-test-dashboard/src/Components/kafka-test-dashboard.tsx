@@ -23,6 +23,7 @@ const KafkaTestDashboard = () => {
         const newMetrics = generateMockData();
         setMetrics(newMetrics);
         setTimeSeriesData(prev => [...prev, { time: new Date().toISOString(), ...newMetrics }].slice(-20));
+        setTimeSeriesData((prev) => [...prev, { time: new Date().toISOString(), ...newMetrics }].slice(-20));
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -46,6 +47,7 @@ const KafkaTestDashboard = () => {
             {testStatus.charAt(0).toUpperCase() + testStatus.slice(1)}
           </Badge>
         </div>
+
         <div>
           <button onClick={handleStart} disabled={testStatus === 'running'} className="mr-2">
             <Play size={20} />
@@ -64,14 +66,17 @@ const KafkaTestDashboard = () => {
           <CardHeader>Messages Processed</CardHeader>
           <CardContent className="text-2xl font-bold">{metrics.messagesProcessed}</CardContent>
         </Card>
+
         <Card>
           <CardHeader>Avg. Latency (ms)</CardHeader>
           <CardContent className="text-2xl font-bold">{metrics.latency}</CardContent>
         </Card>
+
         <Card>
           <CardHeader>Errors</CardHeader>
           <CardContent className="text-2xl font-bold">{metrics.errors}</CardContent>
         </Card>
+
         <Card>
           <CardHeader>Throughput (msg/s)</CardHeader>
           <CardContent className="text-2xl font-bold">{metrics.throughput}</CardContent>
